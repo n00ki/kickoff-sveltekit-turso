@@ -7,7 +7,7 @@
 	export let message: string;
 </script>
 
-<div transition:fade={{ delay: 100, duration: 250 }}>
+<div transition:fade={{ delay: 100 }}>
 	<Alert.Root variant={type === 'error' ? 'destructive' : 'default'} class="m-0 rounded-none">
 		{#if type === 'success'}
 			<CheckCircle2Icon class="h-6 w-6" />
