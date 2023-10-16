@@ -14,11 +14,13 @@
 	import FormWrapper from '$components/FormWrapper.svelte';
 	import { Button } from '$lib/components/ui/button';
 	import { Separator } from '$lib/components/ui/separator';
+	import { Label } from '$lib/components/ui/label';
+	import { Input } from '$lib/components/ui/input';
 	import * as AlertDialog from '$lib/components/ui/alert-dialog';
 
 	// Assets
 	import avatar_placeholder from '$lib/assets/avatar.png';
-	import { Loader2 } from 'lucide-svelte';
+	import { Update } from 'radix-icons-svelte';
 
 	export let data;
 
@@ -171,18 +173,16 @@
 			class="flex w-full flex-col items-center justify-center"
 			use:enhance
 		>
-			<div class="form-control w-full">
-				<label for="avatar" class="label">
-					<span class="label-text">Avatar</span>
-				</label>
+			<div class="grid w-full items-center gap-1.5">
+				<Label for="avatar">Avatar</Label>
 
-				<input
+				<Input
 					id="avatar"
 					name="avatar"
 					type="file"
 					accept="image/*"
 					on:change={upload_avatar}
-					class="file-input file-input-bordered file-input-secondary w-full"
+					class="items-center justify-center"
 					disabled={file_upload_status === 'uploading'}
 				/>
 			</div>
@@ -201,7 +201,7 @@
 
 			<Button disabled={!!$delayed} variant="secondary" class="my-2 w-full">
 				{#if !!$delayed}
-					<Loader2 class="mr-2 h-4 w-4 animate-spin" />
+					<Update class="mr-2 h-4 w-4 animate-spin" />
 				{/if}
 				Update
 			</Button>

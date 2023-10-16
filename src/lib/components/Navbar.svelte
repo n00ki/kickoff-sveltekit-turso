@@ -5,7 +5,7 @@
 	import { slide } from 'svelte/transition';
 
 	// Icons
-	import { MenuIcon, LogOutIcon, X } from 'lucide-svelte';
+	import { HamburgerMenu, Exit, Cross1 } from 'radix-icons-svelte';
 
 	// Components
 	import { Button } from '$lib/components/ui/button';
@@ -32,7 +32,7 @@
 			{:else}
 				<Button href="/profile" variant="outline">Profile</Button>
 				<Button form="logout" type="submit" variant="outline">
-					<LogOutIcon class="mr-1 h-4 w-4" />
+					<Exit class="mr-1 h-4 w-4" />
 					Log out
 				</Button>
 			{/if}
@@ -42,9 +42,9 @@
 		<div class="lg:hidden">
 			<Button on:click={toggle_menu_state} variant="ghost">
 				{#if menu_open}
-					<X />
+					<Cross1 />
 				{:else}
-					<MenuIcon />
+					<HamburgerMenu />
 				{/if}
 			</Button>
 		</div>
@@ -59,7 +59,7 @@
 			{:else}
 				<Button href="/profile" variant="link" on:click={toggle_menu_state}>Profile</Button>
 				<Button form="logout" type="submit" variant="link" on:click={toggle_menu_state}>
-					<LogOutIcon class="mr-1 h-4 w-4" />
+					<Exit class="mr-1 h-4 w-4" />
 					Log out
 				</Button>
 			{/if}

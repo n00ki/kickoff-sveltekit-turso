@@ -15,7 +15,7 @@
 	import * as Alert from '$lib/components/ui/alert';
 
 	// Assets
-	import { Loader2, XCircleIcon } from 'lucide-svelte';
+	import { Update, CrossCircled } from 'radix-icons-svelte';
 
 	// Packages
 	import toast from 'svelte-french-toast';
@@ -110,14 +110,14 @@
 
 		<Button disabled={!!$delayed} variant="secondary" class="my-2 w-full">
 			{#if !!$delayed}
-				<Loader2 class="mr-2 h-4 w-4 animate-spin" />
+				<Update class="mr-2 h-4 w-4 animate-spin" />
 			{/if}
 			Change Password
 		</Button>
 
 		{#if $message}
 			<Alert.Root variant="destructive">
-				<XCircleIcon class="h-6 w-6" />
+				<CrossCircled class="h-6 w-6" />
 				<Alert.Title>Oops...</Alert.Title>
 				<Alert.Description>{$message}</Alert.Description>
 			</Alert.Root>
