@@ -3,24 +3,24 @@
 	import { PUBLIC_AWS_S3_BUCKET_URL } from '$env/static/public';
 
 	// Utils
+	import type { FormOptions } from 'formsnap';
+	import { edit_account_validation_schema } from '$lib/validations/auth.js';
 	import * as flashModule from 'sveltekit-flash-message/client';
 	import { error } from '@sveltejs/kit';
-	import { superForm } from 'sveltekit-superforms/client';
-	import { validate_avatar_file } from '$lib/utils/validations/files.js';
+	import { validate_avatar_file } from '$lib/validations/files.js';
 	import { fade } from 'svelte/transition';
 	import toast from 'svelte-french-toast';
 
 	// Components
 	import FormWrapper from '$components/FormWrapper.svelte';
+	import * as Form from '$lib/components/ui/form';
 	import { Button } from '$lib/components/ui/button';
-	import { Separator } from '$lib/components/ui/separator';
-	import { Label } from '$lib/components/ui/label';
-	import { Input } from '$lib/components/ui/input';
 	import * as AlertDialog from '$lib/components/ui/alert-dialog';
+	import { Separator } from '$lib/components/ui/separator';
 
 	// Assets
 	import avatar_placeholder from '$lib/assets/avatar.png';
-	import { Update } from 'radix-icons-svelte';
+	import { Reload } from 'radix-icons-svelte';
 
 	export let data;
 
@@ -30,13 +30,17 @@
 	let avatar_file_id: string | null = null;
 	let avatar_preview_url: string | null = null;
 
-	const { allErrors, message, reset, enhance, delayed } = superForm(data.form, {
+	const options: FormOptions<typeof edit_account_validation_schema> = {
+		validators: edit_account_validation_schema,
 		autoFocusOnError: 'detect',
 		invalidateAll: true,
+		delayMs: 500,
+		multipleSubmits: 'prevent',
 		syncFlashMessage: false,
 		flashMessage: {
 			module: flashModule
 		},
+		resetForm: true,
 		onSubmit: async ({ formData, cancel }) => {
 			if (avatar_file_id) {
 				formData.set('avatar', avatar_file_id as string);
@@ -48,20 +52,9 @@
 			if (!avatar_file_id) {
 				cancel();
 				toast.error('No changes were made');
-				reset({ keepMessage: false });
-			}
-		},
-		onUpdated: async ({ form }) => {
-			if (!form.valid) {
-				if ($message) toast.error($message);
-				if ($allErrors) {
-					const errors = $allErrors.map((errors) => errors.messages).flat();
-					errors.forEach((message) => toast.error(message));
-				}
-				document.getElementById('email')?.focus();
 			}
 		}
-	});
+	};
 
 	const upload_avatar = async (event: Event) => {
 		file_upload_status = 'ready';
@@ -166,26 +159,26 @@
 			/>
 		</div>
 
-		<form
-			action="?/edit_account"
+		<Form.Root
 			method="POST"
+			action="?/edit_account"
+			form={data.form}
+			schema={edit_account_validation_schema}
 			enctype="multipart/form-data"
-			class="flex w-full flex-col items-center justify-center"
-			use:enhance
+			{options}
+			let:config
+			let:delayed
 		>
-			<div class="grid w-full items-center gap-1.5">
-				<Label for="avatar">Avatar</Label>
-
-				<Input
-					id="avatar"
-					name="avatar"
+			<Form.Field name="avatar" {config} let:constraints>
+				<Form.Label>Avatar</Form.Label>
+				<Form.Input
 					type="file"
-					accept="image/*"
 					on:change={upload_avatar}
-					class="items-center justify-center"
 					disabled={file_upload_status === 'uploading'}
+					{...constraints}
 				/>
-			</div>
+				<Form.Validation />
+			</Form.Field>
 
 			{#if file_upload_status === 'uploading'}
 				<div class="w-full py-2">
@@ -199,53 +192,33 @@
 				</div>
 			{/if}
 
-			<Button disabled={!!$delayed} variant="secondary" class="my-2 w-full">
-				{#if !!$delayed}
-					<Update class="mr-2 h-4 w-4 animate-spin" />
+			<Form.Button disabled={delayed} variant="secondary" class="my-2 w-full">
+				{#if delayed}
+					<Reload class="mr-2 h-4 w-4 animate-spin" />
 				{/if}
 				Update
-			</Button>
+			</Form.Button>
+		</Form.Root>
 
-			{#if $message}
-				<div class="alert alert-error mb-2 shadow-lg">
-					<div>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-6 w-6 flex-shrink-0 stroke-current"
-							fill="none"
-							viewBox="0 0 24 24"
-							><path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-							/></svg
-						>
-						<span>{$message}</span>
-					</div>
+		{#if file_upload_status === 'failed'}
+			{#each file_upload_errors as error}
+				<div class="alert alert-error">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="h-6 w-6 shrink-0 stroke-current"
+						fill="none"
+						viewBox="0 0 24 24"
+						><path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+						/></svg
+					>
+					<span>{error}</span>
 				</div>
-			{/if}
-
-			{#if file_upload_status === 'failed'}
-				{#each file_upload_errors as error}
-					<div class="alert alert-error">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-6 w-6 shrink-0 stroke-current"
-							fill="none"
-							viewBox="0 0 24 24"
-							><path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-							/></svg
-						>
-						<span>{error}</span>
-					</div>
-				{/each}
-			{/if}
-		</form>
+			{/each}
+		{/if}
 
 		<div class="my-2">
 			<Separator />
@@ -266,7 +239,6 @@
 				<AlertDialog.Footer>
 					<AlertDialog.Cancel>Back to safety</AlertDialog.Cancel>
 					<AlertDialog.Action
-						disabled={!!$delayed}
 						class="bg-destructive/90 text-destructive-foreground hover:bg-destructive"
 					>
 						<form

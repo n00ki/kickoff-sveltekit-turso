@@ -8,7 +8,7 @@ import { users } from '$lib/db/models/auth';
 import { eq } from 'drizzle-orm';
 import { redirect } from 'sveltekit-flash-message/server';
 import { superValidate as validate_form } from 'sveltekit-superforms/server';
-import { registration_schema } from '$lib/utils/validations/auth';
+import { registration_schema } from '$lib/validations/auth';
 import { form_fail, set_form_error } from '$lib/utils/helpers/forms';
 import { send_email } from '$lib/utils/mail/mailer';
 
@@ -31,25 +31,35 @@ const register: Action = async (event) => {
 	const form = await validate_form(event.request, registration_schema);
 
 	if (!form.valid) {
-		return form_fail(form, ['password', 'password_confirmation']);
+		return form_fail(form, { remove_sensitive_data: ['password', 'password_confirmation'] });
 	} else {
 		const { email, password, password_confirmation } = form.data;
 
 		if (password !== password_confirmation) {
-			return set_form_error(form, 'Passwords do not match.', {
-				field: 'password_confirmation',
-				remove_sensitive_data: ['password', 'password_confirmation']
-			});
+			return set_form_error(
+				form,
+				'Passwords do not match',
+				{
+					field: 'password_confirmation',
+					remove_sensitive_data: ['password', 'password_confirmation']
+				},
+				event
+			);
 		}
 
 		const get_users = await db.select().from(users).where(eq(users.email, email));
 		const user = get_users[0];
 
 		if (user) {
-			return set_form_error(form, 'Email is already taken.', {
-				field: 'email',
-				remove_sensitive_data: ['password', 'password_confirmation']
-			});
+			return set_form_error(
+				form,
+				'Email is already taken',
+				{
+					field: 'email',
+					remove_sensitive_data: ['password', 'password_confirmation']
+				},
+				event
+			);
 		}
 
 		try {
@@ -80,10 +90,15 @@ const register: Action = async (event) => {
 		} catch (e: any) {
 			console.log(e);
 
-			return set_form_error(form, 'Something went wrong. Please try again later.', {
-				status: 500,
-				remove_sensitive_data: ['password', 'password_confirmation']
-			});
+			return set_form_error(
+				form,
+				'Something went wrong. Please try again later.',
+				{
+					status: 500,
+					remove_sensitive_data: ['password', 'password_confirmation']
+				},
+				event
+			);
 		}
 
 		throw redirect(

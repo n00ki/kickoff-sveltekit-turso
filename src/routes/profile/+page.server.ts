@@ -2,7 +2,7 @@
 import { type Action, fail } from '@sveltejs/kit';
 import { auth } from '$lib/server/auth';
 import { superValidate as validate_form } from 'sveltekit-superforms/server';
-import { edit_account_validation_schema } from '$lib/utils/validations/auth';
+import { edit_account_validation_schema } from '$lib/validations/auth';
 import { set_form_error } from '$lib/utils/helpers/forms';
 import { redirect } from 'sveltekit-flash-message/server';
 
@@ -34,7 +34,7 @@ const edit_account: Action = async (event) => {
 			throw redirect(
 				{
 					type: 'error',
-					message: 'You are not logged in.'
+					message: 'You are not logged in'
 				},
 				event
 			);
@@ -68,7 +68,7 @@ const edit_account: Action = async (event) => {
 			}
 		}
 
-		throw redirect({ type: 'success', message: 'Account updated.' }, event);
+		throw redirect({ type: 'success', message: 'Account updated' }, event);
 	}
 };
 

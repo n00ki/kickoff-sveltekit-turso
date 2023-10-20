@@ -11,7 +11,7 @@ import { users, tokens } from '$lib/db/models/auth';
 import { eq } from 'drizzle-orm';
 import { redirect } from 'sveltekit-flash-message/server';
 import { superValidate as validate_form } from 'sveltekit-superforms/server';
-import { request_password_reset_schema } from '$lib/utils/validations/auth';
+import { request_password_reset_schema } from '$lib/validations/auth';
 import { form_fail, set_form_error } from '$lib/utils/helpers/forms';
 import { send_email } from '$lib/utils/mail/mailer';
 import { generateRandomString } from 'lucia/utils';
@@ -42,8 +42,6 @@ const request_reset: Action = async (event) => {
 
 	const get_users = await db.select({ id: users.id }).from(users).where(eq(users.email, email));
 	const user = get_users[0];
-
-	console.log(user);
 
 	if (!user) {
 		// we send a success message even if the user doesn't exist to prevent email enumeration

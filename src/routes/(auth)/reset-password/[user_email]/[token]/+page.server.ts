@@ -9,7 +9,7 @@ import { auth } from '$lib/server/auth';
 import { error } from '@sveltejs/kit';
 import { redirect } from 'sveltekit-flash-message/server';
 import { superValidate as validate_form } from 'sveltekit-superforms/server';
-import { reset_password_schema } from '$lib/utils/validations/auth';
+import { reset_password_schema } from '$lib/validations/auth';
 import { form_fail, set_form_error } from '$lib/utils/helpers/forms';
 
 export async function load({ locals, params }) {
@@ -59,23 +59,33 @@ const reset: Action = async (event) => {
 	const form = await validate_form(event.request, reset_password_schema);
 
 	if (!form.valid) {
-		return form_fail(form, ['password', 'password_confirmation']);
+		return form_fail(form, { remove_sensitive_data: ['password', 'password_confirmation'] });
 	} else {
 		const { email, token, password, password_confirmation } = form.data;
 
 		if (password !== password_confirmation) {
-			return set_form_error(form, 'Passswords do not match', {
-				status: 400,
-				field: 'password_confirmation'
-			});
+			return set_form_error(
+				form,
+				'Passswords do not match',
+				{
+					status: 400,
+					field: 'password_confirmation'
+				},
+				event
+			);
 		}
 		try {
 			await auth.updateKeyPassword('email', email, password);
 		} catch (error) {
-			return set_form_error(form, 'Something went wrong. Please try again later.', {
-				status: 500,
-				remove_sensitive_data: ['password', 'password_confirmation']
-			});
+			return set_form_error(
+				form,
+				'Something went wrong. Please try again later.',
+				{
+					status: 500,
+					remove_sensitive_data: ['password', 'password_confirmation']
+				},
+				event
+			);
 		}
 
 		await db.delete(tokens).where(eq(tokens.id, token));
@@ -85,7 +95,7 @@ const reset: Action = async (event) => {
 		'/login',
 		{
 			type: 'success',
-			message: 'Password was reset successfully. Please login.'
+			message: 'Password was reset successfully. You can now login.'
 		},
 		event
 	);
