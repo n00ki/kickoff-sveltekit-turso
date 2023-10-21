@@ -52,13 +52,34 @@
 
 	<!-- Mobile Dropdown Menu -->
 	{#if menu_open}
-		<div transition:slide class="flex w-full flex-col gap-2 bg-accent p-4 text-accent-foreground">
+		<div transition:slide class="flex w-full flex-col gap-2 bg-accent p-4">
 			{#if !user}
-				<Button href="/login" variant="link" on:click={toggle_menu_state}>Login</Button>
-				<Button href="/register" variant="link" on:click={toggle_menu_state}>Register</Button>
+				<Button
+					href="/login"
+					variant="link"
+					on:click={toggle_menu_state}
+					class="text-accent-foreground">Login</Button
+				>
+				<Button
+					href="/register"
+					variant="link"
+					on:click={toggle_menu_state}
+					class="text-accent-foreground">Register</Button
+				>
 			{:else}
-				<Button href="/profile" variant="link" on:click={toggle_menu_state}>Profile</Button>
-				<Button form="logout" type="submit" variant="link" on:click={toggle_menu_state}>
+				<Button
+					href="/profile"
+					variant="link"
+					on:click={toggle_menu_state}
+					class="text-accent-foreground">Profile</Button
+				>
+				<Button
+					form="logout"
+					type="submit"
+					variant="link"
+					on:click={toggle_menu_state}
+					class="text-accent-foreground"
+				>
 					<Exit class="mr-1 h-4 w-4" />
 					Log out
 				</Button>
