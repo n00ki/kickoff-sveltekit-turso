@@ -1,5 +1,6 @@
 <script lang="ts">
 	// Utils
+	import { onNavigate, disableScrollHandling } from '$app/navigation';
 	import { getFlash } from 'sveltekit-flash-message/client';
 
 	// Stores
@@ -26,6 +27,16 @@
 	if (browser) {
 		$js_enabled = true;
 	}
+
+	// Disable scroll handling on same route navigation for theme switching
+	onNavigate((navigation) => {
+		const previous_route = navigation.from?.url.pathname;
+		const current_route = navigation.to?.url.pathname;
+
+		if (previous_route === current_route) {
+			disableScrollHandling();
+		}
+	});
 </script>
 
 <SEO {...$page.data.metadata} url={$page.url.href} />

@@ -23,7 +23,7 @@
 		<Button
 			id="light-theme-switcher"
 			aria-label="Switch to light theme"
-			formaction="/?/set_theme&theme={themes.light}&redirect_to={$page.url.pathname}"
+			formaction="/theme?/set&theme={themes.light}&redirect_to={$page.url.pathname}"
 			variant="outline"
 			size="icon"
 			class="rounded-r-none border-r-0"
@@ -34,7 +34,7 @@
 		<Button
 			id="dark-theme-switcher"
 			aria-label="Switch to dark theme"
-			formaction="/?/set_theme&theme={themes.dark}&redirect_to={$page.url.pathname}"
+			formaction="/theme?/set&theme={themes.dark}&redirect_to={$page.url.pathname}"
 			variant="outline"
 			size="icon"
 			class="rounded-r-none border-r-0"
