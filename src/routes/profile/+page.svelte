@@ -16,11 +16,12 @@
 	import * as Form from '$lib/components/ui/form';
 	import { Button } from '$lib/components/ui/button';
 	import * as AlertDialog from '$lib/components/ui/alert-dialog';
+	import * as Alert from '$lib/components/ui/alert';
 	import { Separator } from '$lib/components/ui/separator';
 
 	// Assets
 	import avatar_placeholder from '$lib/assets/avatar.png';
-	import { Reload } from 'radix-icons-svelte';
+	import { Reload, CrossCircled } from 'radix-icons-svelte';
 
 	export let data;
 
@@ -202,21 +203,12 @@
 
 		{#if file_upload_status === 'failed'}
 			{#each file_upload_errors as error}
-				<div class="alert alert-error">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="h-6 w-6 shrink-0 stroke-current"
-						fill="none"
-						viewBox="0 0 24 24"
-						><path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-						/></svg
-					>
-					<span>{error}</span>
-				</div>
+				<Alert.Root variant="destructive" class="inline-flex items-center gap-2">
+					<div>
+						<CrossCircled class="h-6 w-6" />
+					</div>
+					<Alert.Description>{error}</Alert.Description>
+				</Alert.Root>
 			{/each}
 		{/if}
 
