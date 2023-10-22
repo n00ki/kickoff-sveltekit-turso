@@ -17,7 +17,6 @@
 
 	// Styles
 	import '../styles/app.css';
-	import { onMount } from 'svelte';
 
 	export let data;
 
@@ -29,12 +28,6 @@
 		$js_enabled = true;
 	}
 
-	// Set view height for mobile browsers
-	onMount(() => {
-		set_view_height();
-		window.addEventListener('resize', set_view_height);
-	});
-
 	// Disable scroll handling on same route navigation for theme switching
 	onNavigate((navigation) => {
 		const previous_route = navigation.from?.url.pathname;
@@ -44,11 +37,6 @@
 			disableScrollHandling();
 		}
 	});
-
-	function set_view_height() {
-		const vh = window.innerHeight * 0.01;
-		document.documentElement.style.setProperty('--vh', `${vh}px`);
-	}
 </script>
 
 <SEO {...$page.data.metadata} url={$page.url.href} />

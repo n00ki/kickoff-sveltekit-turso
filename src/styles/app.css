@@ -51,3 +51,10 @@
 		--ring: 222.2 84% 4.9%;
 	}
 }
+
+@supports (-webkit-touch-callout: none) {
+	.min-h-screen {
+		min-height: 100vh;
+		min-height: -webkit-fill-available;
+	}
+}
