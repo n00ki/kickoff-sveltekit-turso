@@ -1,10 +1,7 @@
 {
 	"type": "module",
-	"name": "kickoff-sveltekit",
+	"name": "kickoff-sveltekit-turso",
 	"version": "2.0.0",
-	"engines": {
-		"node": ">=18.0.0"
-	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
