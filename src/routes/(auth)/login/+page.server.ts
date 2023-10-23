@@ -40,7 +40,6 @@ const login: Action = async (event) => {
 			});
 			event.locals.auth.setSession(session);
 		} catch (e: any) {
-			console.log(e);
 			if (
 				(e instanceof LuciaError && e.message === 'AUTH_INVALID_KEY_ID') ||
 				e.message === 'AUTH_INVALID_PASSWORD'

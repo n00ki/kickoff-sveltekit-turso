@@ -15,7 +15,6 @@
 
 	const options: FormOptions<typeof registration_schema> = {
 		validators: registration_schema,
-		autoFocusOnError: 'detect',
 		delayMs: 500,
 		multipleSubmits: 'prevent',
 		syncFlashMessage: false,

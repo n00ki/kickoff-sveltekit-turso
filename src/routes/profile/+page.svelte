@@ -33,7 +33,7 @@
 
 	const options: FormOptions<typeof edit_account_validation_schema> = {
 		validators: edit_account_validation_schema,
-		autoFocusOnError: 'detect',
+
 		invalidateAll: true,
 		delayMs: 500,
 		multipleSubmits: 'prevent',

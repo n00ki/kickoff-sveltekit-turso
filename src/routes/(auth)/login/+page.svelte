@@ -15,7 +15,6 @@
 
 	const options: FormOptions<typeof login_schema> = {
 		validators: login_schema,
-		autoFocusOnError: 'detect',
 		invalidateAll: true,
 		delayMs: 500,
 		multipleSubmits: 'prevent',

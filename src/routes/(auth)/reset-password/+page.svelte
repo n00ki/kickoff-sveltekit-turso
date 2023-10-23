@@ -15,7 +15,6 @@
 
 	const options: FormOptions<typeof request_password_reset_schema> = {
 		validators: request_password_reset_schema,
-		autoFocusOnError: 'detect',
 		invalidateAll: true,
 		delayMs: 500,
 		multipleSubmits: 'prevent',
