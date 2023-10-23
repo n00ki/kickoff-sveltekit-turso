@@ -62,7 +62,7 @@
 		"@libsql/client": "^0.3.6",
 		"@lucia-auth/adapter-sqlite": "^2.0.1",
 		"drizzle-orm": "^0.28.6",
-		"lucia": "^2.7.1",
+		"lucia": "^2.7.2",
 		"svelte-email": "^0.0.4",
 		"sveltekit-flash-message": "^2.2.1"
 	}

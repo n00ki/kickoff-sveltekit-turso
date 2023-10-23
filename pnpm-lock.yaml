@@ -16,13 +16,13 @@ dependencies:
     version: 0.3.6
   '@lucia-auth/adapter-sqlite':
     specifier: ^2.0.1
-    version: 2.0.1(@libsql/client@0.3.6)(better-sqlite3@9.0.0)(lucia@2.7.1)
+    version: 2.0.1(@libsql/client@0.3.6)(better-sqlite3@9.0.0)(lucia@2.7.2)
   drizzle-orm:
     specifier: ^0.28.6
     version: 0.28.6(@libsql/client@0.3.6)(better-sqlite3@9.0.0)
   lucia:
-    specifier: ^2.7.1
-    version: 2.7.1
+    specifier: ^2.7.2
+    version: 2.7.2
   svelte-email:
     specifier: ^0.0.4
     version: 0.0.4
@@ -1057,23 +1057,23 @@ packages:
     dependencies:
       '@libsql/hrana-client': 0.5.5
       js-base64: 3.7.5
-      libsql: 0.1.31
+      libsql: 0.1.32
     transitivePeerDependencies:
       - bufferutil
       - encoding
       - utf-8-validate
     dev: false
 
-  /@libsql/darwin-arm64@0.1.31:
-    resolution: {integrity: sha512-1TOnhaPztpr3wv7MJc9u16ZNWwDbpchy5jbLP5mLDUfG/Pmqf0u62pGm0M394pxkHzVJfcXTV9y2Lo6MFdhpAw==}
+  /@libsql/darwin-arm64@0.1.32:
+    resolution: {integrity: sha512-xoYp/dv4e78J1l1zOKLl/nN+a9E1eHFV3+XfK1BmcCj+8bA5cES+rjrmsu3hRumRJ6PoT5vPDQhTnZPlSU2FAQ==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: false
     optional: true
 
-  /@libsql/darwin-x64@0.1.31:
-    resolution: {integrity: sha512-frisONJKWFPgRPwHw7V6188bHl5ryml+cwpznsd1O14ug7AAhxWzXcVLu0R3EHyOmID/oJusKCnej3Y2EAp9kg==}
+  /@libsql/darwin-x64@0.1.32:
+    resolution: {integrity: sha512-5IojEKrGTWWuy8coEX0gW2Nlyv2vKc5ZG9MIfIjv5MGcAtfdJ9ElUCsqEIkCfDUSqe7e8d191s5X53fuV8IZTg==}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
@@ -1112,39 +1112,39 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@libsql/linux-arm64-gnu@0.1.31:
-    resolution: {integrity: sha512-+uJt6d9IrWOvVk8y0T50YqVSAkGclxb7DFyQ5cEQgRM7KWmHB3u5VDdxLor5NTs0h9ZJ7XRW8HlwP2gF2qvmwA==}
+  /@libsql/linux-arm64-gnu@0.1.32:
+    resolution: {integrity: sha512-eTJwB13qlSTrvo0DO2xFGz2X16NPbSul99/h2aNJw0Lshi9TeWehG5b6QAPuy9361bdAfFtsYIvv+JqkvbGTHQ==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: false
     optional: true
 
-  /@libsql/linux-x64-gnu@0.1.31:
-    resolution: {integrity: sha512-woWyhUL9A/jd4Ec+scJW8+PlE3vav1wxoSiMyF+geOTKT51ki09Bs5shZuLVEDL4snK7XqupRHCKnAoLXdvSNw==}
+  /@libsql/linux-x64-gnu@0.1.32:
+    resolution: {integrity: sha512-i81OK5qHswQQtB2+u8G1rYpy8S3PO0b7boETJBXrs1hTIi0MDdMZftPTECjsF6Ne7MpZCe7Emkn0mQ+zM/2kmQ==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: false
     optional: true
 
-  /@libsql/linux-x64-musl@0.1.31:
-    resolution: {integrity: sha512-z578zqY7NOmZjUWFjwYZYBnIAJbCAN7iS1FXxT68JlOWEa1F4Nd3PVOSR3beEpmVPpMs3vyJDNRLslIK1uCj9A==}
+  /@libsql/linux-x64-musl@0.1.32:
+    resolution: {integrity: sha512-6rTRcfCRHHcqioldjAhQ86WJfMuFPdcNUDQL5Kbj3o0N2Tz1K+7c9bfsGQjN3F7S7zDu4uA9Ir819pc5shL42w==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: false
     optional: true
 
-  /@libsql/win32-x64-msvc@0.1.31:
-    resolution: {integrity: sha512-JQtjsI9yiW7WJo2WUMDuDK+JF9yg0XYkuGndIz6IHatjUXSa7E12ynTtg2HxuK/l1o9fSMoq2ho0oIPQ94jiaQ==}
+  /@libsql/win32-x64-msvc@0.1.32:
+    resolution: {integrity: sha512-IoQjcAYtwVJW/z4scBNGpWFUVYeZ7CK0PJWu4vUM66w4i7X+o9ZGWpF3r5AXdkRmyqAWRAnAk88wHtWmvzYiAw==}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
     dev: false
     optional: true
 
-  /@lucia-auth/adapter-sqlite@2.0.1(@libsql/client@0.3.6)(better-sqlite3@9.0.0)(lucia@2.7.1):
+  /@lucia-auth/adapter-sqlite@2.0.1(@libsql/client@0.3.6)(better-sqlite3@9.0.0)(lucia@2.7.2):
     resolution: {integrity: sha512-yc7XQ4X3sWG1gyUGHqaXipJIkmvB4MOgJypnSMWy7Vjhn3AOCM2xw51xTs+dGpLOQIn2Laomg9xpmDM2/9tgqQ==}
     peerDependencies:
       '@libsql/client': ^0.3.0
@@ -1158,7 +1158,7 @@ packages:
     dependencies:
       '@libsql/client': 0.3.6
       better-sqlite3: 9.0.0
-      lucia: 2.7.1
+      lucia: 2.7.2
     dev: false
 
   /@melt-ui/svelte@0.55.3(svelte@4.2.2):
@@ -1712,7 +1712,7 @@ packages:
       sirv: 2.0.3
       svelte: 4.2.2
       tiny-glob: 0.2.9
-      undici: 5.26.4
+      undici: 5.26.5
       vite: 4.5.0(@types/node@20.8.7)
     transitivePeerDependencies:
       - supports-color
@@ -2069,7 +2069,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.22.1
-      caniuse-lite: 1.0.30001551
+      caniuse-lite: 1.0.30001553
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -2162,7 +2162,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001551
+      caniuse-lite: 1.0.30001553
       electron-to-chromium: 1.4.563
       node-releases: 2.0.13
       update-browserslist-db: 1.0.13(browserslist@4.22.1)
@@ -2206,13 +2206,13 @@ packages:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
     dependencies:
       browserslist: 4.22.1
-      caniuse-lite: 1.0.30001551
+      caniuse-lite: 1.0.30001553
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
     dev: true
 
-  /caniuse-lite@1.0.30001551:
-    resolution: {integrity: sha512-vtBAez47BoGMMzlbYhfXrMV1kvRF2WP/lqiMuDu1Sb4EE4LKEgjopFDSRtZfdVnslNRpOqV/woE+Xgrwj6VQlg==}
+  /caniuse-lite@1.0.30001553:
+    resolution: {integrity: sha512-N0ttd6TrFfuqKNi+pMgWJTb9qrdJu4JSpgPFLe/lrD19ugC6fZgF0pUewRowDwzdDnb9V41mFcdlYgl/PyKf4A==}
     dev: true
 
   /chai@4.3.10:
@@ -3446,20 +3446,20 @@ packages:
       type-check: 0.4.0
     dev: true
 
-  /libsql@0.1.31:
-    resolution: {integrity: sha512-vRN2W1mpu3mm4N50Mk+YDqI4jh4Yz10ZyO3V91DV+1VBIiVQ0Ns7CY9cPjxq8KTeu/kPupdjw85Aqzrkjg85AA==}
+  /libsql@0.1.32:
+    resolution: {integrity: sha512-aG+ucDcjij2jZ9MM/cceZ1ChIf+JpbWvjz8NIF68DwFXLMOMcI6m9nVQHP+My2RepOs8GEqklBF3QuNBQfJx6Q==}
     cpu: [x64, arm64]
     os: [darwin, linux, win32]
     dependencies:
       '@neon-rs/load': 0.0.4
       detect-libc: 2.0.2
     optionalDependencies:
-      '@libsql/darwin-arm64': 0.1.31
-      '@libsql/darwin-x64': 0.1.31
-      '@libsql/linux-arm64-gnu': 0.1.31
-      '@libsql/linux-x64-gnu': 0.1.31
-      '@libsql/linux-x64-musl': 0.1.31
-      '@libsql/win32-x64-msvc': 0.1.31
+      '@libsql/darwin-arm64': 0.1.32
+      '@libsql/darwin-x64': 0.1.32
+      '@libsql/linux-arm64-gnu': 0.1.32
+      '@libsql/linux-x64-gnu': 0.1.32
+      '@libsql/linux-x64-musl': 0.1.32
+      '@libsql/win32-x64-msvc': 0.1.32
     dev: false
 
   /lilconfig@2.1.0:
@@ -3520,8 +3520,8 @@ packages:
       es5-ext: 0.10.62
     dev: true
 
-  /lucia@2.7.1:
-    resolution: {integrity: sha512-EHDTajS1YWA7Q37jd29Far1l4nfZgsWLp4hDQeaQhVpJd2WKQqA3626kJYmOj1CTweVMkE54xFi5JIph+agZkQ==}
+  /lucia@2.7.2:
+    resolution: {integrity: sha512-fEsD5EW8k3JxEhp3Cor+ar3dAfSY/QAjN/gQArfxbp1bludR7zzyW6s/gmy1cuGvABASTuZxgwCyBz0Osbg6WA==}
     dev: false
 
   /magic-string@0.27.0:
@@ -5052,8 +5052,8 @@ packages:
   /undici-types@5.25.3:
     resolution: {integrity: sha512-Ga1jfYwRn7+cP9v8auvEXN1rX3sWqlayd4HP7OKk4mZWylEmu3KzXDUGrQUN6Ol7qo1gPvB2e5gX6udnyEPgdA==}
 
-  /undici@5.26.4:
-    resolution: {integrity: sha512-OG+QOf0fTLtazL9P9X7yqWxQ+Z0395Wk6DSkyTxtaq3wQEjIroVe7Y4asCX/vcCxYpNGMnwz8F0qbRYUoaQVMw==}
+  /undici@5.26.5:
+    resolution: {integrity: sha512-cSb4bPFd5qgR7qr2jYAi0hlX9n5YKK2ONKkLFkxl+v/9BvC0sOpZjBHDBSXc5lWAf5ty9oZdRXytBIHzgUcerw==}
     engines: {node: '>=14.0'}
     dependencies:
       '@fastify/busboy': 2.0.0
