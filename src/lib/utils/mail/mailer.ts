@@ -13,42 +13,42 @@ import WelcomeTemplate from '$lib/utils/mail/templates/Welcome.svelte';
 import ResetPasswordTemplate from '$lib/utils/mail/templates/ResetPassword.svelte';
 
 export const send_email = async (
-	to: string,
-	subject: string,
-	template_name: string,
-	template_data?: any
+  to: string,
+  subject: string,
+  template_name: string,
+  template_data?: any
 ) => {
-	if (to && subject && template_name) {
-		sendgrid.setApiKey(SENDGRID_API_KEY);
+  if (to && subject && template_name) {
+    sendgrid.setApiKey(SENDGRID_API_KEY);
 
-		let html;
+    let html;
 
-		switch (template_name) {
-			case 'Welcome':
-				html = render({
-					template: WelcomeTemplate
-				});
-				break;
-			case 'ResetPassword':
-				html = render({
-					template: ResetPasswordTemplate,
-					props: {
-						url: template_data?.url
-					}
-				});
-				break;
-			default:
-				return fail(402);
-		}
+    switch (template_name) {
+      case 'Welcome':
+        html = render({
+          template: WelcomeTemplate
+        });
+        break;
+      case 'ResetPassword':
+        html = render({
+          template: ResetPasswordTemplate,
+          props: {
+            url: template_data?.url
+          }
+        });
+        break;
+      default:
+        return fail(402);
+    }
 
-		const options = {
-			from: EMAIL_SENDER,
-			to,
-			subject,
-			html
-		};
+    const options = {
+      from: EMAIL_SENDER,
+      to,
+      subject,
+      html
+    };
 
-		await sendgrid.send(options);
-		console.log('Email sent successfully');
-	}
+    await sendgrid.send(options);
+    console.log('Email sent successfully');
+  }
 };

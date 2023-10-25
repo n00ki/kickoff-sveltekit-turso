@@ -3,8 +3,8 @@ import { drizzle } from 'drizzle-orm/libsql';
 import { createClient } from '@libsql/client';
 
 export const client = createClient({
-	url: TURSO_DATABASE_URL,
-	authToken: TURSO_DATABASE_AUTH_TOKEN
+  url: TURSO_DATABASE_URL,
+  authToken: TURSO_DATABASE_AUTH_TOKEN
 });
 
 const db = drizzle(client);

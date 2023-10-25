@@ -10,26 +10,26 @@ import { sveltekit } from 'lucia/middleware';
 import { dev } from '$app/environment';
 
 export const auth = lucia({
-	adapter: libsql(client, {
-		user: 'users',
-		key: 'keys',
-		session: 'sessions'
-	}),
-	env: dev ? 'DEV' : 'PROD',
-	middleware: sveltekit(),
-	getUserAttributes: (data) => {
-		return {
-			email: data.email,
-			avatar: data.avatar
-		};
-	},
-	csrfProtection: true,
-	sessionCookie: {
-		name: '__auth_session',
-		attributes: {
-			sameSite: 'strict'
-		}
-	}
+  adapter: libsql(client, {
+    user: 'users',
+    key: 'keys',
+    session: 'sessions'
+  }),
+  env: dev ? 'DEV' : 'PROD',
+  middleware: sveltekit(),
+  getUserAttributes: (data) => {
+    return {
+      email: data.email,
+      avatar: data.avatar
+    };
+  },
+  csrfProtection: true,
+  sessionCookie: {
+    name: '__auth_session',
+    attributes: {
+      sameSite: 'strict'
+    }
+  }
 });
 
 export type Auth = typeof auth;

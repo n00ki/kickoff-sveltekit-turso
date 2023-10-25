@@ -13,103 +13,103 @@ import { form_fail, set_form_error } from '$lib/utils/helpers/forms';
 import { send_email } from '$lib/utils/mail/mailer';
 
 export async function load({ locals }) {
-	// redirect to `/` if logged in
-	const session = await locals.auth.validate();
-	if (session) throw redirect(302, '/');
+  // redirect to `/` if logged in
+  const session = await locals.auth.validate();
+  if (session) throw redirect(302, '/');
 
-	const form = await validate_form(registration_schema);
+  const form = await validate_form(registration_schema);
 
-	return {
-		metadata: {
-			title: 'Register'
-		},
-		form
-	};
+  return {
+    metadata: {
+      title: 'Register'
+    },
+    form
+  };
 }
 
 const register: Action = async (event) => {
-	const form = await validate_form(event.request, registration_schema);
+  const form = await validate_form(event.request, registration_schema);
 
-	if (!form.valid) {
-		return form_fail(form, { remove_sensitive_data: ['password', 'password_confirmation'] });
-	} else {
-		const { email, password, password_confirmation } = form.data;
+  if (!form.valid) {
+    return form_fail(form, { remove_sensitive_data: ['password', 'password_confirmation'] });
+  } else {
+    const { email, password, password_confirmation } = form.data;
 
-		if (password !== password_confirmation) {
-			return set_form_error(
-				form,
-				'Passwords do not match',
-				{
-					field: 'password_confirmation',
-					remove_sensitive_data: ['password', 'password_confirmation']
-				},
-				event
-			);
-		}
+    if (password !== password_confirmation) {
+      return set_form_error(
+        form,
+        'Passwords do not match',
+        {
+          field: 'password_confirmation',
+          remove_sensitive_data: ['password', 'password_confirmation']
+        },
+        event
+      );
+    }
 
-		const get_users = await db.select().from(users).where(eq(users.email, email));
-		const user = get_users[0];
+    const get_users = await db.select().from(users).where(eq(users.email, email));
+    const user = get_users[0];
 
-		if (user) {
-			return set_form_error(
-				form,
-				'Email is already taken',
-				{
-					field: 'email',
-					remove_sensitive_data: ['password', 'password_confirmation']
-				},
-				event
-			);
-		}
+    if (user) {
+      return set_form_error(
+        form,
+        'Email is already taken',
+        {
+          field: 'email',
+          remove_sensitive_data: ['password', 'password_confirmation']
+        },
+        event
+      );
+    }
 
-		try {
-			await auth.createUser({
-				key: {
-					providerId: 'email',
-					providerUserId: email,
-					password
-				},
-				attributes: {
-					email
-				}
-			});
+    try {
+      await auth.createUser({
+        key: {
+          providerId: 'email',
+          providerUserId: email,
+          password
+        },
+        attributes: {
+          email
+        }
+      });
 
-			// Automatically log in the user
-			try {
-				const key = await auth.useKey('email', email.toLowerCase(), password);
-				const session = await auth.createSession({
-					userId: key.userId,
-					attributes: {}
-				});
-				event.locals.auth.setSession(session);
-			} catch (e: any) {
-				console.log(e);
-			}
+      // Automatically log in the user
+      try {
+        const key = await auth.useKey('email', email.toLowerCase(), password);
+        const session = await auth.createSession({
+          userId: key.userId,
+          attributes: {}
+        });
+        event.locals.auth.setSession(session);
+      } catch (e: any) {
+        console.log(e);
+      }
 
-			send_email(email, 'Welcome to SvelteKit!', 'Welcome');
-		} catch (e: any) {
-			console.log(e);
+      send_email(email, 'Welcome to SvelteKit!', 'Welcome');
+    } catch (e: any) {
+      console.log(e);
 
-			return set_form_error(
-				form,
-				'Something went wrong. Please try again later.',
-				{
-					status: 500,
-					remove_sensitive_data: ['password', 'password_confirmation']
-				},
-				event
-			);
-		}
+      return set_form_error(
+        form,
+        'Something went wrong. Please try again later.',
+        {
+          status: 500,
+          remove_sensitive_data: ['password', 'password_confirmation']
+        },
+        event
+      );
+    }
 
-		throw redirect(
-			'/login',
-			{
-				type: 'success',
-				message: 'Registered successfully.'
-			},
-			event
-		);
-	}
+    throw redirect(
+      '/login',
+      {
+        type: 'success',
+        message: 'Registered successfully.'
+      },
+      event
+    );
+  }
 };
 
 export const actions = { register };
