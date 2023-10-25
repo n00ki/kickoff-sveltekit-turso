@@ -33,7 +33,6 @@
 
   const options: FormOptions<typeof edit_account_validation_schema> = {
     validators: edit_account_validation_schema,
-
     invalidateAll: true,
     delayMs: 500,
     multipleSubmits: 'prevent',
