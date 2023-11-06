@@ -43,7 +43,7 @@
 
 <Toaster />
 
-<div class="font-primary flex min-h-screen flex-col bg-background text-foreground">
+<div class="flex min-h-screen flex-col bg-background font-primary text-foreground">
   <Navbar user={data.user} />
 
   <main class="container mx-auto flex flex-1 flex-col py-4">
@@ -56,7 +56,7 @@
 </div>
 
 {#if $flash}
-  <div class="absolute bottom-0 w-full overflow-hidden">
+  <div class="fixed bottom-0 w-full overflow-hidden">
     <Flash type={$flash.type} message={$flash?.message} />
   </div>
 {/if}
