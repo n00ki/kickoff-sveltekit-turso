@@ -1,12 +1,12 @@
 // Env Variables
-import { SENDGRID_API_KEY, EMAIL_SENDER } from '$env/static/private';
+import { RESEND_API_KEY, EMAIL_SENDER } from '$env/static/private';
 
 // Utils
 import { fail } from '@sveltejs/kit';
 import { render } from 'svelte-email';
 
 // Packages
-import sendgrid from '@sendgrid/mail';
+import { Resend } from 'resend';
 
 // Templates
 import WelcomeTemplate from '$lib/utils/mail/templates/Welcome.svelte';
@@ -19,7 +19,8 @@ export const send_email = async (
   template_data?: any
 ) => {
   if (to && subject && template_name) {
-    sendgrid.setApiKey(SENDGRID_API_KEY);
+    // sendgrid.setApiKey(SENDGRID_API_KEY);
+    const resend = new Resend(RESEND_API_KEY);
 
     let html;
 
@@ -48,7 +49,11 @@ export const send_email = async (
       html
     };
 
-    await sendgrid.send(options);
-    console.log('Email sent successfully');
+    try {
+      await resend.emails.send(options);
+      console.log('Email sent successfully');
+    } catch (error) {
+      console.log('Error sending email', error);
+    }
   }
 };

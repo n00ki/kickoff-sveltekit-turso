@@ -61,7 +61,7 @@
 
 @supports (-webkit-touch-callout: none) {
   .min-h-screen {
-    min-height: 100vh;
+    min-height: 100svh;
     min-height: -webkit-fill-available;
   }
 }
