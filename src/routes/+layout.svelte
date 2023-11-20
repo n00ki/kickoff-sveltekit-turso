@@ -43,7 +43,7 @@
 
 <Toaster />
 
-<div class="flex min-h-screen flex-col bg-background font-primary text-foreground">
+<div class="flex min-h-[100svh] flex-col bg-background font-primary text-foreground">
   <Navbar user={data.user} />
 
   <main class="container mx-auto flex flex-1 flex-col py-4">
